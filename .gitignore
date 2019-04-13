@@ -1,6 +1,7 @@
-
 # Created by https://www.gitignore.io/api/c++,xcode,visualstudio,openframeworks,openframeworks+visualstudio
 # Edit at https://www.gitignore.io/?templates=c++,xcode,visualstudio,openframeworks,openframeworks+visualstudio
+
+.vscode
 
 ### C++ ###
 # Prerequisites
