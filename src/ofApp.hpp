@@ -42,5 +42,11 @@ private:
     CelestialBody planet_;
 
     double time_elapsed_;
+
+    /**
+     * If a planet's Cartesian coordinates change by x, its screen coordinates
+     * will change by scale_factor * x.
+     */
+    double scale_factor = 200;
 };
 }  // namespace physicsvisuals
