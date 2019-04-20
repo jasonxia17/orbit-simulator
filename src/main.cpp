@@ -1,4 +1,4 @@
-#include "ofApp.h"
+#include "ofApp.hpp"
 #include "ofMain.h"
 
 #define DISPLAY_MODE OF_WINDOW  // Can be OF_WINDOW or OF_FULLSCREEN
@@ -8,5 +8,5 @@ int main() {
     ofSetFrameRate(100);
 
     // this kicks off the running of my app
-    ofRunApp(new physicstools::OrbitSimulator());
+    ofRunApp(new physicsvisuals::OrbitSimulator());
 }
