@@ -19,6 +19,7 @@ public:
     }
 
     const vec2& getPosition() const;
+    const vec2& getVelocity() const;
     const std::deque<vec2>& getPositionLog() const;
 
     /**

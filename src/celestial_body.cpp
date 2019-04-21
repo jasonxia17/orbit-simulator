@@ -6,6 +6,10 @@ const vec2& CelestialBody::getPosition() const {
     return position_;
 }
 
+const vec2& CelestialBody::getVelocity() const {
+    return velocity_;
+}
+
 const std::deque<vec2>& CelestialBody::getPositionLog() const {
     return position_log_;
 }
