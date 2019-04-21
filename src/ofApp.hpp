@@ -10,6 +10,15 @@ using glm::vec2;
 namespace physicsvisuals {
 
 class OrbitSimulator : public ofBaseApp {
+private:
+    enum AppState {
+        RUNNING,
+        PAUSED,
+        GETTING_USER_INPUT,
+        PLANET_CRASHED,
+        WELCOME_SCREEN,
+    };
+
 public:
     /**
      * Function used for one time setup. Sets the title and background of the app.
@@ -29,7 +38,7 @@ public:
     void draw();
 
     /**
-     * Responds to these keys: space (start simulation), p (pause/unpause), r (restart),
+     * Responds to these keys: space (start simulation), p (pause/unpause), r (reset),
      * -/= (zoom in/out).
      */
     void keyPressed(int key);
@@ -54,6 +63,8 @@ private:
      * real_coordinates is passed by copy because it's modified by the method.
      */
     vec2 getScreenCoordinates(vec2 real_coordinates) const;
+
+    AppState current_state_ = WELCOME_SCREEN;
 
     CelestialBody planet_;
 
