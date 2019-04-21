@@ -1,12 +1,13 @@
 #pragma once
 
-#include <vector>
-#include <string>
 #include <sstream>
+#include <string>
+#include <vector>
 
 #include "celestial_body.hpp"
 #include "ofMain.h"
 #include "ofxGui.h"
+#include "physical_constants.hpp"
 
 using glm::vec2;
 

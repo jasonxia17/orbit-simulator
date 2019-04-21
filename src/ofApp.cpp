@@ -68,8 +68,6 @@ void OrbitSimulator::draw() {
 }
 
 void OrbitSimulator::drawStarAndPlanet() const {
-    const double kStarRadius = 0.25;
-    const double kPlanetRadius = 0.1;
     const vec2 origin;
 
     // draws the Star

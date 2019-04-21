@@ -21,8 +21,6 @@ const std::deque<vec2>& CelestialBody::getPositionLog() const {
 }
 
 void CelestialBody::updateVelocityAndPosition(double time_step) {
-    const double kGravitationalParameter = 16;  // the quantity GM
-
     vec2 acceleration = -kGravitationalParameter / pow(glm::length(position_), 3) * position_;
     // a = -GM / |r|^3 * r, where r is a vector
 
