@@ -33,6 +33,14 @@ public:
      */
     void updateVelocityAndPosition(double time_step);
 
+    /**
+     * Returns true if planet is too close to star
+     */
+    bool crashedIntoStar();
+
+    /**
+     * Cap on size of position_log_
+     */
     static const size_t kMaxPositionsStored = 1000;
 
 private:

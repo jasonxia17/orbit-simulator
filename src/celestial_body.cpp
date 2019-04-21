@@ -33,4 +33,8 @@ void CelestialBody::updateVelocityAndPosition(double time_step) {
     }
 }
 
+bool CelestialBody::crashedIntoStar() {
+    return glm::length(position_) < kStarRadius + kPlanetRadius;
+}
+
 }  // namespace physicsvisuals
