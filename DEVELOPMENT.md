@@ -1,9 +1,10 @@
 # To-do
 
-* Display error message if planet crashes into star (to avoid unpredictable behavior from extremely large forces)
+* Display a welcome message with information about how to use the app
 
 # Ideas
 
+* Provide an option to enforce circular orbits by calculating the initial velocity based on the initial position that the user inputs
 * Display gravitational potential energy and kinetic energy, add methods to
 CelestialBody class for calculating these quantities
 * Display the coordinates/distance to star at the point where the mouse is hovering
@@ -11,7 +12,9 @@ CelestialBody class for calculating these quantities
 # Weekly Progress Log
 
 ## Week of 4/27/2019
-* Incorperated a GUI for inputting intial parameters (used guiFromParametersExample as an example)
+
+* Display an error message and halt simulation if planet crashes into star (to avoid unpredictable behavior from extremely large forces)
+* Incorporated a GUI for inputting intial parameters (used guiFromParametersExample as an example)
 * Displayed numerical information on the screen
 (time elapsed, instantaneous position/velocity)
 * Added an enum for app states (Welcome/Instructions, User Input, Running, Paused, Crashed)
