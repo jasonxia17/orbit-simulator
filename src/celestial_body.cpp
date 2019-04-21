@@ -2,6 +2,12 @@
 
 namespace physicsvisuals {
 
+CelestialBody::CelestialBody() {}
+
+CelestialBody::CelestialBody(vec2 initial_position, vec2 initial_velocity)
+    : position_(initial_position),
+      velocity_(initial_velocity) {}
+
 const vec2& CelestialBody::getPosition() const {
     return position_;
 }
@@ -15,7 +21,7 @@ const std::deque<vec2>& CelestialBody::getPositionLog() const {
 }
 
 void CelestialBody::updateVelocityAndPosition(double time_step) {
-    const double kGravitationalParameter = 16; // the quantity GM
+    const double kGravitationalParameter = 16;  // the quantity GM
 
     vec2 acceleration = -kGravitationalParameter / pow(glm::length(position_), 3) * position_;
     // a = -GM / |r|^3 * r, where r is a vector
