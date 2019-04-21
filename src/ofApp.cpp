@@ -14,13 +14,14 @@ void OrbitSimulator::update() {
 }
 
 void OrbitSimulator::draw() {
+    drawPlanetTrail();
     drawSunAndPlanet();
     drawNumericalInfo();
 }
 
 void OrbitSimulator::drawSunAndPlanet() const {
-    const double kSunRadius = 0.15;
-    const double kPlanetRadius = 0.05;
+    const double kSunRadius = 0.25;
+    const double kPlanetRadius = 0.1;
     const vec2 origin;
 
     // draws the sun
@@ -30,6 +31,29 @@ void OrbitSimulator::drawSunAndPlanet() const {
     // draws the orbiting planet
     ofSetColor(ofColor::blue);
     ofDrawCircle(getScreenCoordinates(planet_.getPosition()), kPlanetRadius * scalefactor_);
+}
+
+void OrbitSimulator::drawPlanetTrail() const {
+    ofSetLineWidth(3);
+
+    auto trail = planet_.getPositionLog();
+
+    ofColor trail_color = ofColor::blue;
+    const double kMaxOpacity = 255;
+
+    if (trail.empty()) {
+        return;
+        // otherwise trail.size() - 1 = size_t(0) - 1 = huge number --> segfault
+    }
+
+    for (size_t i = 0; i < trail.size() - 1; ++i) {
+        double opacity_fraction = 1 - (double)i / CelestialBody::kMaxPositionsStored;
+        trail_color.a = kMaxOpacity * opacity_fraction;
+        // linearly decrease opacity of trail for less recent positions
+
+        ofSetColor(trail_color);
+        ofDrawLine(getScreenCoordinates(trail[i]), getScreenCoordinates(trail[i + 1]));
+    }
 }
 
 void OrbitSimulator::drawNumericalInfo() const {
