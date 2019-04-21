@@ -27,11 +27,11 @@ void OrbitSimulator::drawSunAndPlanet() const {
 
     // draws the sun
     ofSetColor(ofColor::yellow);
-    ofDrawCircle(getScreenCoordinates(origin), kSunRadius * scalefactor_);
+    ofDrawCircle(getScreenCoordinates(origin), kSunRadius * scale_factor_);
 
     // draws the orbiting planet
     ofSetColor(ofColor::blue);
-    ofDrawCircle(getScreenCoordinates(planet_.getPosition()), kPlanetRadius * scalefactor_);
+    ofDrawCircle(getScreenCoordinates(planet_.getPosition()), kPlanetRadius * scale_factor_);
 }
 
 void OrbitSimulator::drawPlanetTrail() const {
@@ -95,10 +95,10 @@ void OrbitSimulator::drawNumericalInfo() const {
 void OrbitSimulator::keyPressed(int key) {
     const double kZoomFactor = 1.03;
     if (key == '-') {
-        scalefactor_ /= kZoomFactor;
+        scale_factor_ /= kZoomFactor;
 
     } else if (key == '=') {
-        scalefactor_ *= kZoomFactor;
+        scale_factor_ *= kZoomFactor;
     }
 }
 
@@ -108,7 +108,7 @@ vec2 OrbitSimulator::getScreenCoordinates(vec2 real_coordinates) const {
 
     real_coordinates.y *= -1;  // canvas y-coordinates are the reverse of Cartesian y-coordinates
 
-    return scalefactor_ * real_coordinates + center;
+    return scale_factor_ * real_coordinates + center;
 }
 
 }  // namespace physicsvisuals

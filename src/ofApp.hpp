@@ -61,8 +61,8 @@ private:
 
     /**
      * If a planet's Cartesian coordinates change by x, its screen coordinates
-     * will change by scalefactor_ * x.
+     * will change by scale_factor_ * x.
      */
-    double scalefactor_ = 100;
+    double scale_factor_ = 100;
 };
 }  // namespace physicsvisuals
