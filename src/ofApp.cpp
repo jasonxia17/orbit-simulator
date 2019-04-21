@@ -23,21 +23,21 @@ void OrbitSimulator::draw() {
 
     drawPlanetTrail();
     drawPlanetVelocityVector();
-    drawSunAndPlanet();
+    drawStarAndPlanet();
 
     if (current_state_ == RUNNING || current_state_ == PAUSED) {
         drawNumericalInfo();
     }
 }
 
-void OrbitSimulator::drawSunAndPlanet() const {
-    const double kSunRadius = 0.25;
+void OrbitSimulator::drawStarAndPlanet() const {
+    const double kStarRadius = 0.25;
     const double kPlanetRadius = 0.1;
     const vec2 origin;
 
-    // draws the sun
+    // draws the Star
     ofSetColor(ofColor::yellow);
-    ofDrawCircle(getScreenCoordinates(origin), kSunRadius * scale_factor_);
+    ofDrawCircle(getScreenCoordinates(origin), kStarRadius * scale_factor_);
 
     // draws the orbiting planet
     ofSetColor(ofColor::blue);

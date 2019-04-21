@@ -10,8 +10,8 @@
 
 * Display gravitational potential energy and kinetic energy, add methods to
 CelestialBody class for calculating these quantities
-* Display error message if planet crashes into sun (to avoid a divide-by-0 error)
-* Display the coordinates/distance to sun at the point where the mouse is hovering
+* Display error message if planet crashes into star (to avoid a divide-by-0 error)
+* Display the coordinates/distance to star at the point where the mouse is hovering
 
 # Weekly Progress Log
 

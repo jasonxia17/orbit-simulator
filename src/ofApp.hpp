@@ -50,9 +50,9 @@ private:
     void drawNumericalInfo() const;
 
     /**
-     * Draws a circle at the sun and planet's positions.
+     * Draws a circle at the star and planet's positions.
      */
-    void drawSunAndPlanet() const;
+    void drawStarAndPlanet() const;
 
     void drawPlanetTrail() const;
 
