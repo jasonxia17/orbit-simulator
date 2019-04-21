@@ -6,6 +6,7 @@
 
 #include "celestial_body.hpp"
 #include "ofMain.h"
+#include "ofxGui.h"
 
 using glm::vec2;
 
@@ -68,7 +69,7 @@ private:
 
     AppState current_state_ = WELCOME_SCREEN;
 
-    CelestialBody planet_ = CelestialBody(vec2(4,0), vec2(0,1));
+    CelestialBody planet_;
 
     double time_elapsed_ = 0;
 
@@ -77,6 +78,10 @@ private:
      * will change by scale_factor_ * x.
      */
     double scale_factor_ = 100;
+
+    ofxPanel input_panel_;
+    ofParameter<vec2> initial_position_;
+    ofParameter<vec2> initial_velocity_;
 
     ofTrueTypeFont app_font_;
 };

@@ -27,9 +27,20 @@ void OrbitSimulator::setup() {
 
     ofTrueTypeFontSettings font_settings("../fonts/Liberation-Mono-Regular.ttf", 16);
     app_font_.load(font_settings);
+
+    vec2 default_val(2, 2);
+    vec2 input_bound(10, 10);
+
+    input_panel_.setup();
+    input_panel_.add(initial_position_.set("Initial Position", default_val, -input_bound, input_bound));
+    input_panel_.add(initial_velocity_.set("Initial Velocity", default_val, -input_bound, input_bound));
 }
 
 void OrbitSimulator::update() {
+    if (current_state_ == GETTING_USER_INPUT) {
+        planet_ = CelestialBody(initial_position_, initial_velocity_);
+    }
+
     if (current_state_ == RUNNING) {
         const double kTimeStep = 0.01;
         planet_.updateVelocityAndPosition(kTimeStep);
@@ -41,6 +52,10 @@ void OrbitSimulator::draw() {
     if (current_state_ == WELCOME_SCREEN) {
         // TODO: display welcome message
         return;
+    }
+
+    if (current_state_ == GETTING_USER_INPUT) {
+        input_panel_.draw();
     }
 
     drawPlanetTrail();
