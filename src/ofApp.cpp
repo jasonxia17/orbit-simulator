@@ -15,6 +15,7 @@ void OrbitSimulator::update() {
 
 void OrbitSimulator::draw() {
     drawPlanetTrail();
+    drawPlanetVelocityVector();
     drawSunAndPlanet();
     drawNumericalInfo();
 }
@@ -54,6 +55,34 @@ void OrbitSimulator::drawPlanetTrail() const {
         ofSetColor(trail_color);
         ofDrawLine(getScreenCoordinates(trail[i]), getScreenCoordinates(trail[i + 1]));
     }
+}
+
+void OrbitSimulator::drawPlanetVelocityVector() const {
+    ofSetLineWidth(4);
+    ofSetColor(ofColor::orange);
+
+    // A velocity v will show up as a line with length kVectorScaleFactor * v
+    const double kVectorScaleFactor = 0.35;
+    vec2 vector_head = planet_.getPosition() + kVectorScaleFactor * planet_.getVelocity();
+    ofDrawLine(getScreenCoordinates(planet_.getPosition()), getScreenCoordinates(vector_head));
+
+    // Part 2: Draw triangular arrow at vector head
+
+    std::vector<vec2> arrow_coordinates{vec2(0, -0.1), vec2(0, 0.1), vec2(0.2, 0)};
+    // Currently, this is an arrow at the origin pointing directly to the right
+
+    float arrow_angle = glm::orientedAngle(vec2(1, 0), glm::normalize(planet_.getVelocity()));
+    // signed angle between velocity and positive-x axis, in the interval [-pi, pi]
+    // vector parameters need to be normalized when using the orientedAngle function
+    // arrow_angle must be a float instead of double to maintain consistent template types
+
+    for (vec2& point : arrow_coordinates) {
+        point = glm::rotate(point, arrow_angle); // rotate arrow to be parallel to vector
+        point += vector_head;  // translate arrow to vector head
+        point = getScreenCoordinates(point);
+    }
+    
+    ofDrawTriangle(arrow_coordinates[0], arrow_coordinates[1], arrow_coordinates[2]);
 }
 
 void OrbitSimulator::drawNumericalInfo() const {
