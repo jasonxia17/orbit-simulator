@@ -1,22 +1,20 @@
 # To-do
 
-* Display numerical information on the screen (time elapsed, instantaneous position/velocity)
-* Add enum for app states (Instructions, User Input, Running, Paused, Crash)
-* Incorperate a UI similar to the one shown below (see guiFromParametersExample for example code):
-
-![](https://66.media.tumblr.com/94326685206eb2e5d02264c550d5c5d0/tumblr_inline_p7djm2RWdI1sbgmkt_540.gif)
+* Display error message if planet crashes into star (to avoid unpredictable behavior from extremely large forces)
 
 # Ideas
 
 * Display gravitational potential energy and kinetic energy, add methods to
 CelestialBody class for calculating these quantities
-* Display error message if planet crashes into star (to avoid a divide-by-0 error)
 * Display the coordinates/distance to star at the point where the mouse is hovering
 
 # Weekly Progress Log
 
 ## Week of 4/27/2019
-
+* Incorperated a GUI for inputting intial parameters (used guiFromParametersExample as an example)
+* Displayed numerical information on the screen
+(time elapsed, instantaneous position/velocity)
+* Added an enum for app states (Welcome/Instructions, User Input, Running, Paused, Crashed)
 * Displayed an arrow representing the instantaneous velocity of the planet
   * Combines a line with a triangle that has been rotated and translated
 * Traced a path behind the circle
@@ -40,7 +38,7 @@ CelestialBody class for calculating these quantities
 
 I created a simple animation of a point going in circles using the 2D graphics library.
 
-I also found Python code simulates planetary orbits with the turtle module. This is mainly a proof of concept that
+I also found Python code that simulates planetary orbits with the turtle module. This is mainly a proof of concept that
 the back-end of the simulation should be feasible. I'll probably use the same mathematical techniques for my simulation.
 
 https://fiftyexamples.readthedocs.io/en/latest/gravity.html
