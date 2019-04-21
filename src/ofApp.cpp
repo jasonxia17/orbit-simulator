@@ -8,16 +8,26 @@ void OrbitSimulator::setup() {
 }
 
 void OrbitSimulator::update() {
-    const double kTimeStep = 0.01;
-    planet_.updateVelocityAndPosition(kTimeStep);
-    time_elapsed_ += kTimeStep;
+    if (current_state_ == RUNNING) {
+        const double kTimeStep = 0.01;
+        planet_.updateVelocityAndPosition(kTimeStep);
+        time_elapsed_ += kTimeStep;
+    }
 }
 
 void OrbitSimulator::draw() {
+    if (current_state_ == WELCOME_SCREEN) {
+        // TODO: display welcome message
+        return;
+    }
+
     drawPlanetTrail();
     drawPlanetVelocityVector();
     drawSunAndPlanet();
-    drawNumericalInfo();
+
+    if (current_state_ == RUNNING || current_state_ == PAUSED) {
+        drawNumericalInfo();
+    }
 }
 
 void OrbitSimulator::drawSunAndPlanet() const {
@@ -77,11 +87,11 @@ void OrbitSimulator::drawPlanetVelocityVector() const {
     // arrow_angle must be a float instead of double to maintain consistent template types
 
     for (vec2& point : arrow_coordinates) {
-        point = glm::rotate(point, arrow_angle); // rotate arrow to be parallel to vector
-        point += vector_head;  // translate arrow to vector head
+        point = glm::rotate(point, arrow_angle);  // rotate arrow to be parallel to vector
+        point += vector_head;                     // translate arrow to vector head
         point = getScreenCoordinates(point);
     }
-    
+
     ofDrawTriangle(arrow_coordinates[0], arrow_coordinates[1], arrow_coordinates[2]);
 }
 
@@ -93,12 +103,36 @@ void OrbitSimulator::drawNumericalInfo() const {
 }
 
 void OrbitSimulator::keyPressed(int key) {
-    const double kZoomFactor = 1.03;
-    if (key == '-') {
-        scale_factor_ /= kZoomFactor;
+    // Welcome screen only responds to the space bar
+    if (current_state_ == WELCOME_SCREEN) {
+        if (key == ' ') {
+            current_state_ = GETTING_USER_INPUT;
+        }
+        return;
+    }
 
-    } else if (key == '=') {
+    const double kZoomFactor = 1.03;  // amount of zoom per key press
+
+    if (key == '-') {  // zooming out
+        scale_factor_ /= kZoomFactor;
+    } else if (key == '=') {  // zooming in
         scale_factor_ *= kZoomFactor;
+
+    } else if (key == ' ') {  // starting simulation
+        if (current_state_ == GETTING_USER_INPUT) {
+            current_state_ = RUNNING;
+        }
+
+    } else if (key == 'p') {  // pausing and unpausing
+        if (current_state_ == RUNNING) {
+            current_state_ = PAUSED;
+        } else if (current_state_ == PAUSED) {
+            current_state_ = RUNNING;
+        }
+
+    } else if (key == 'r') {  // resetting the simulation
+        planet_ = CelestialBody();
+        current_state_ = GETTING_USER_INPUT;
     }
 }
 
