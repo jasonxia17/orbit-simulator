@@ -1,6 +1,8 @@
 #pragma once
 
 #include <vector>
+#include <string>
+#include <sstream>
 
 #include "celestial_body.hpp"
 #include "ofMain.h"
@@ -66,7 +68,7 @@ private:
 
     AppState current_state_ = WELCOME_SCREEN;
 
-    CelestialBody planet_;
+    CelestialBody planet_ = CelestialBody(vec2(4,0), vec2(0,1));
 
     double time_elapsed_ = 0;
 
@@ -75,5 +77,7 @@ private:
      * will change by scale_factor_ * x.
      */
     double scale_factor_ = 100;
+
+    ofTrueTypeFont app_font_;
 };
 }  // namespace physicsvisuals

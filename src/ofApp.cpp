@@ -1,10 +1,32 @@
 #include "ofApp.hpp"
 
+namespace {  // anonymous namespace with rounding helper methods
+
+// this function was taken from
+// https://stackoverflow.com/questions/1343890/rounding-number-to-2-decimal-places-in-c
+
+string toRoundedString(const double val) {
+    stringstream ss;
+    ss << fixed;      // fixed point instead of floating
+    ss.precision(2);  // set # places after decimal
+    ss << val;
+    return ss.str();
+}
+
+string toRoundedString(const vec2& val) {
+    return "(" + toRoundedString(val.x) + ", " + toRoundedString(val.y) + ")";
+}
+
+}  // end anonymous namespace
+
 namespace physicsvisuals {
 
 void OrbitSimulator::setup() {
     ofSetWindowTitle("Going in Circles");
     ofBackground(ofColor::black);
+
+    ofTrueTypeFontSettings font_settings("../fonts/Liberation-Mono-Regular.ttf", 16);
+    app_font_.load(font_settings);
 }
 
 void OrbitSimulator::update() {
@@ -96,10 +118,20 @@ void OrbitSimulator::drawPlanetVelocityVector() const {
 }
 
 void OrbitSimulator::drawNumericalInfo() const {
+    float left_margin = 30;
+    float vertical_spacing = 45;  // space between consecutive lines of test
+
     ofSetColor(ofColor::white);
-    ofTrueTypeFont myfont;
-    myfont.load("../fonts/Liberation-Mono-Regular.ttf", 20);
-    myfont.drawString(ofToString(time_elapsed_), 100, 100);
+    app_font_.drawString("Time Elapsed (s): " + toRoundedString(time_elapsed_),
+                         left_margin, 1 * vertical_spacing);
+
+    ofSetColor(ofColor::blue);
+    app_font_.drawString("Position (m): " + toRoundedString(planet_.getPosition()),
+                         left_margin, 2 * vertical_spacing);
+
+    ofSetColor(ofColor::orange);
+    app_font_.drawString("Velocity (m/s): " + toRoundedString(planet_.getVelocity()),
+                         left_margin, 3 * vertical_spacing);
 }
 
 void OrbitSimulator::keyPressed(int key) {
