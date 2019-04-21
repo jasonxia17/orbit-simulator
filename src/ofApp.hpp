@@ -33,20 +33,35 @@ public:
     void keyPressed(int key);
 
 private:
+
+    /**
+     * Displays numerical information about the orbit on the screen.
+     */
+    void drawNumericalInfo() const;
+
+    /**
+     * Draws a circle at the sun and planet's positions.
+     */
+    void drawSunAndPlanet() const;
+
+    void drawPlanetTrail() const;
+
+    void drawPlanetVelocityVector() const;
+
     /** 
      * Transforms Cartesian coordinates into canvas coordinates.
      * real_coordinates is passed by copy because it's modified by the method.
      */
-    vec2 getScreenCoordinates(vec2 real_coordinates);
+    vec2 getScreenCoordinates(vec2 real_coordinates) const;
 
     CelestialBody planet_;
 
-    double time_elapsed_;
+    double time_elapsed_ = 0;
 
     /**
      * If a planet's Cartesian coordinates change by x, its screen coordinates
-     * will change by scale_factor * x.
+     * will change by scalefactor_ * x.
      */
-    double scale_factor = 200;
+    double scalefactor_ = 200;
 };
 }  // namespace physicsvisuals
