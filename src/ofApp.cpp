@@ -42,6 +42,11 @@ void OrbitSimulator::update() {
     }
 
     if (current_state_ == RUNNING) {
+        if (planet_.crashedIntoStar()) {
+            current_state_ = PLANET_CRASHED;
+            return;
+        }
+
         const double kTimeStep = 0.01;
         planet_.updateVelocityAndPosition(kTimeStep);
         time_elapsed_ += kTimeStep;
@@ -54,16 +59,21 @@ void OrbitSimulator::draw() {
         return;
     }
 
-    if (current_state_ == GETTING_USER_INPUT) {
-        input_panel_.draw();
-    }
-
     drawPlanetTrail();
     drawPlanetVelocityVector();
     drawStarAndPlanet();
 
+    if (current_state_ == GETTING_USER_INPUT) {
+        input_panel_.draw();
+    }
+
     if (current_state_ == RUNNING || current_state_ == PAUSED) {
         drawNumericalInfo();
+    }
+
+    if (current_state_ == PLANET_CRASHED) {
+        ofSetColor(ofColor::white);
+        app_font_.drawString("The planet crashed :(\nPress r to reset", 50, 50);
     }
 }
 
@@ -177,6 +187,7 @@ void OrbitSimulator::keyPressed(int key) {
 
     } else if (key == 'r') {  // resetting the simulation
         planet_ = CelestialBody();
+        time_elapsed_ = 0;
         current_state_ = GETTING_USER_INPUT;
     }
 }
