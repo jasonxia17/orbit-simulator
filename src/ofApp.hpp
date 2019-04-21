@@ -33,7 +33,6 @@ public:
     void keyPressed(int key);
 
 private:
-
     /**
      * Displays numerical information about the orbit on the screen.
      */
@@ -62,6 +61,6 @@ private:
      * If a planet's Cartesian coordinates change by x, its screen coordinates
      * will change by scalefactor_ * x.
      */
-    double scalefactor_ = 200;
+    double scalefactor_ = 100;
 };
 }  // namespace physicsvisuals

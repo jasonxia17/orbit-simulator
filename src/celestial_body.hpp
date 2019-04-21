@@ -15,7 +15,7 @@ public:
      */
     CelestialBody() {
         position_.x = 4;
-        velocity_.y = 1.3;
+        velocity_.y = 1;
     }
 
     const vec2& getPosition() const;
