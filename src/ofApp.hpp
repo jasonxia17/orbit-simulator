@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include "celestial_body.hpp"
 #include "ofMain.h"
 
