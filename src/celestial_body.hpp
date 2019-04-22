@@ -9,12 +9,15 @@ using glm::vec2;
 
 namespace physicsvisuals {
 
+class OrbitSimulator;
+// must be forward declared, since it's not defined until after this file is included.
+
 class CelestialBody {
 public:
     /**
-     * Default constructor sets initial parameters to 0.
+     * Creates a celestial body with a reference to its simulator.
      */
-    CelestialBody();
+    CelestialBody(const OrbitSimulator& simulator);
 
     /**
      * Sets position and velocity to values provided in parameters.
@@ -56,6 +59,11 @@ private:
      * prevents the class from storing too much unneeded information.
      */
     std::deque<vec2> position_log_;
+
+    /**
+     * Reference to parent simulator. Necessary for planet's drawing functions.
+     */
+    const OrbitSimulator& simulator_;
 };
 
 }  // namespace physicsvisuals

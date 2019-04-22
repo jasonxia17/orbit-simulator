@@ -21,6 +21,9 @@ string toRoundedString(const vec2& val) {
 
 namespace physicsvisuals {
 
+OrbitSimulator::OrbitSimulator()
+    : planet_(*this) {}
+
 void OrbitSimulator::setup() {
     ofSetWindowTitle("Going in Circles");
     ofBackground(ofColor::black);

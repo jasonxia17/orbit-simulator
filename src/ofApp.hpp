@@ -25,6 +25,11 @@ private:
 
 public:
     /**
+     * Constructor that calls the constructor for Celestial Body.
+     */
+    OrbitSimulator();
+
+    /**
      * Function used for one time setup. Sets the title and background of the app.
      */
     void setup();

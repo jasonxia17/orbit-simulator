@@ -2,7 +2,8 @@
 
 namespace physicsvisuals {
 
-CelestialBody::CelestialBody() {}
+CelestialBody::CelestialBody(const OrbitSimulator& simulator)
+    : simulator_(simulator) {}
 
 void CelestialBody::resetMotion(const vec2& initial_position, const vec2& initial_velocity) {
     position_log_.clear();
