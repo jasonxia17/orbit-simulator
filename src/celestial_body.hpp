@@ -17,9 +17,10 @@ public:
     CelestialBody();
 
     /**
-     * Creates a body with these initial parameters.
+     * Sets position and velocity to values provided in parameters.
+     * Also clears the trail of the planet.
      */
-    CelestialBody(vec2 initial_position, vec2 initial_velocity);
+    void resetMotion(const vec2& initial_position, const vec2& initial_velocity);
 
     const vec2& getPosition() const;
     const vec2& getVelocity() const;
@@ -36,7 +37,7 @@ public:
     /**
      * Returns true if planet is too close to star
      */
-    bool crashedIntoStar();
+    bool crashedIntoStar() const;
 
     /**
      * Cap on size of position_log_

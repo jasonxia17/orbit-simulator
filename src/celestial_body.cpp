@@ -4,9 +4,11 @@ namespace physicsvisuals {
 
 CelestialBody::CelestialBody() {}
 
-CelestialBody::CelestialBody(vec2 initial_position, vec2 initial_velocity)
-    : position_(initial_position),
-      velocity_(initial_velocity) {}
+void CelestialBody::resetMotion(const vec2& initial_position, const vec2& initial_velocity) {
+    position_log_.clear();
+    position_ = initial_position;
+    velocity_ = initial_velocity;
+}
 
 const vec2& CelestialBody::getPosition() const {
     return position_;
@@ -33,7 +35,7 @@ void CelestialBody::updateVelocityAndPosition(double time_step) {
     }
 }
 
-bool CelestialBody::crashedIntoStar() {
+bool CelestialBody::crashedIntoStar() const {
     return glm::length(position_) < kStarRadius + kPlanetRadius;
 }
 

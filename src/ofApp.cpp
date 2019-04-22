@@ -38,7 +38,8 @@ void OrbitSimulator::setup() {
 
 void OrbitSimulator::update() {
     if (current_state_ == GETTING_USER_INPUT) {
-        planet_ = CelestialBody(initial_position_, initial_velocity_);
+        // reset planet based on provided parameters
+        planet_.resetMotion(initial_position_, initial_velocity_);
     }
 
     if (current_state_ == RUNNING) {
@@ -186,7 +187,6 @@ void OrbitSimulator::keyPressed(int key) {
         }
 
     } else if (key == 'r') {  // resetting the simulation
-        planet_ = CelestialBody();
         time_elapsed_ = 0;
         current_state_ = GETTING_USER_INPUT;
     }
