@@ -13,6 +13,9 @@ CelestialBody class for calculating these quantities
 
 ## Week of 4/27/2019
 
+* Restructured code to make it more object oriented
+  * Moved mass, radius, colors, and initial ofParameters for position and velocity into the CelestialBody class
+  * Moved drawing functions (draw body, trail, and velocity vector) into the CelestialBody class
 * Display an error message and halt simulation if planet crashes into star (to avoid unpredictable behavior from extremely large forces)
 * Incorporated a GUI for inputting intial parameters (used guiFromParametersExample as an example)
 * Displayed numerical information on the screen
