@@ -2,13 +2,18 @@
 
 namespace physicsvisuals {
 
-CelestialBody::CelestialBody(const OrbitSimulator& simulator)
-    : simulator_(simulator) {}
+CelestialBody::CelestialBody(const OrbitSimulator& simulator,
+                             vec2 initial_position, vec2 initial_velocity)
+    : simulator_(simulator) {
+    vec2 param_bound(10, 10);
+    initial_position_.set("Initial Position", initial_position, -param_bound, param_bound);
+    initial_velocity_.set("Initial Velocity", initial_velocity, -param_bound, param_bound);
+}
 
-void CelestialBody::resetMotion(const vec2& initial_position, const vec2& initial_velocity) {
+void CelestialBody::resetMotion() {
     position_log_.clear();
-    position_ = initial_position;
-    velocity_ = initial_velocity;
+    position_ = initial_position_;
+    velocity_ = initial_velocity_;
 }
 
 const vec2& CelestialBody::getPosition() const {

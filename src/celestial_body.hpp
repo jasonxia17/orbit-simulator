@@ -16,14 +16,19 @@ class CelestialBody {
 public:
     /**
      * Creates a celestial body with a reference to its simulator.
+     * Also sets the ofParameters for initial position and velocity.
      */
-    CelestialBody(const OrbitSimulator& simulator);
+    CelestialBody(const OrbitSimulator& simulator,
+                  vec2 initial_position = vec2(0, 0),
+                  vec2 initial_velocity = vec2(0, 0));
 
     /**
-     * Sets position and velocity to values provided in parameters.
+     * Sets position and velocity to the initial values specified
+     * by the ofParameters initial_position_ and initial_velocity_
+     * (which are controlled by the GUI panel)
      * Also clears the trail of the planet.
      */
-    void resetMotion(const vec2& initial_position, const vec2& initial_velocity);
+    void resetMotion();
 
     const vec2& getPosition() const;
     const vec2& getVelocity() const;
@@ -46,6 +51,12 @@ public:
     void drawTrail() const;
 
     void drawVelocityVector() const;
+
+    // These initial parameters are public because the GUI panel in the OrbitSimulator
+    // needs to access/modify them.
+
+    ofParameter<vec2> initial_position_;
+    ofParameter<vec2> initial_velocity_;
 
 private:
     vec2 position_;
@@ -73,4 +84,4 @@ private:
 
 }  // namespace physicsvisuals
 
-#include "orbit_simulator.hpp" // contains definition of OrbitSimulator class
+#include "orbit_simulator.hpp"  // contains definition of OrbitSimulator class

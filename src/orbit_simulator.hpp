@@ -83,8 +83,6 @@ private:
     double scale_factor_ = 100;
 
     ofxPanel input_panel_;
-    ofParameter<vec2> initial_position_;
-    ofParameter<vec2> initial_velocity_;
 
     ofTrueTypeFont app_font_;
 };

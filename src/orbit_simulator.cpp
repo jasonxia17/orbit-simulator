@@ -22,7 +22,7 @@ string toRoundedString(const vec2& val) {
 namespace physicsvisuals {
 
 OrbitSimulator::OrbitSimulator()
-    : planet_(*this) {}
+    : planet_(*this, vec2(4, 0), vec2(0, 1)) {}
 
 void OrbitSimulator::setup() {
     ofSetWindowTitle("Going in Circles");
@@ -31,18 +31,16 @@ void OrbitSimulator::setup() {
     ofTrueTypeFontSettings font_settings("../fonts/Liberation-Mono-Regular.ttf", 16);
     app_font_.load(font_settings);
 
-    vec2 default_val(2, 2);
-    vec2 input_bound(10, 10);
-
     input_panel_.setup();
-    input_panel_.add(initial_position_.set("Initial Position", default_val, -input_bound, input_bound));
-    input_panel_.add(initial_velocity_.set("Initial Velocity", default_val, -input_bound, input_bound));
+    input_panel_.add(planet_.initial_position_);
+    input_panel_.add(planet_.initial_velocity_);
 }
 
 void OrbitSimulator::update() {
     if (current_state_ == GETTING_USER_INPUT) {
-        // reset planet based on provided parameters
-        planet_.resetMotion(initial_position_, initial_velocity_);
+        planet_.resetMotion();
+        // must be called on every frame to ensure that planet responds to
+        // initial parameters set in GUI
     }
 
     if (current_state_ == RUNNING) {
