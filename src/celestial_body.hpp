@@ -73,4 +73,4 @@ private:
 
 }  // namespace physicsvisuals
 
-#include "ofApp.hpp" // contains definition of OrbitSimulator class
+#include "orbit_simulator.hpp" // contains definition of OrbitSimulator class

@@ -1,4 +1,4 @@
-#include "ofApp.hpp"
+#include "orbit_simulator.hpp"
 
 namespace {  // anonymous namespace with rounding helper methods
 
