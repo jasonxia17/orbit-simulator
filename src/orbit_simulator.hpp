@@ -76,14 +76,15 @@ public:
 
 protected:
     /**
-     * Draws the circular bodies, trails, and velocity vectors of the CelestialBodies
+     * Draws the star, planet, and velocity vector and trail of the planet.
+     * Can be overridden for multi-body chaotic simulations.
      */
-    void drawVisuals() const;
+    virtual void drawVisuals() const;
 
     /**
      * Displays numerical information about the orbit on the screen.
      */
-    void drawNumericalInfo() const;
+    virtual void drawNumericalInfo() const;
 
     /**
      * Measured in seconds.
