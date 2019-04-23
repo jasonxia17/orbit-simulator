@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#include "celestial_body.hpp"
+#include "celestial_body.hpp"  // definition of CelestialBody class
 #include "ofMain.h"
 #include "ofxGui.h"
 #include "physical_constants.hpp"
@@ -52,26 +52,24 @@ public:
      */
     void keyPressed(int key);
 
-private:
     /**
-     * Displays numerical information about the orbit on the screen.
+     * Getter for scale_factor_.
+     * If a planet's Cartesian coordinates change by x, its screen coordinates
+     * will change by scale_factor_ * x.
      */
-    void drawNumericalInfo() const;
-
-    /**
-     * Draws a circle at the star and planet's positions.
-     */
-    void drawStarAndPlanet() const;
-
-    void drawPlanetTrail() const;
-
-    void drawPlanetVelocityVector() const;
+    double getScaleFactor() const;
 
     /** 
      * Transforms Cartesian coordinates into canvas coordinates.
      * real_coordinates is passed by copy because it's modified by the method.
      */
     vec2 getScreenCoordinates(vec2 real_coordinates) const;
+
+private:
+    /**
+     * Displays numerical information about the orbit on the screen.
+     */
+    void drawNumericalInfo() const;
 
     AppState current_state_ = WELCOME_SCREEN;
 
@@ -80,8 +78,7 @@ private:
     double time_elapsed_ = 0;
 
     /**
-     * If a planet's Cartesian coordinates change by x, its screen coordinates
-     * will change by scale_factor_ * x.
+     * See getScaleFactor documentation
      */
     double scale_factor_ = 100;
 

@@ -27,7 +27,6 @@ public:
 
     const vec2& getPosition() const;
     const vec2& getVelocity() const;
-    const std::deque<vec2>& getPositionLog() const;
 
     /**
      * Performs one step of Euler's method to calculate the new velocity and position of the planet.
@@ -42,10 +41,11 @@ public:
      */
     bool crashedIntoStar() const;
 
-    /**
-     * Cap on size of position_log_
-     */
-    static const size_t kMaxPositionsStored = 1000;
+    void drawBody() const;
+
+    void drawTrail() const;
+
+    void drawVelocityVector() const;
 
 private:
     vec2 position_;
@@ -61,9 +61,16 @@ private:
     std::deque<vec2> position_log_;
 
     /**
+     * Cap on size of position_log_
+     */
+    static const size_t kMaxPositionsStored = 1000;
+
+    /**
      * Reference to parent simulator. Necessary for planet's drawing functions.
      */
     const OrbitSimulator& simulator_;
 };
 
 }  // namespace physicsvisuals
+
+#include "ofApp.hpp" // contains definition of OrbitSimulator class
