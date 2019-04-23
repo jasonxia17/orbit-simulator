@@ -3,8 +3,14 @@
 namespace physicsvisuals {
 
 CelestialBody::CelestialBody(const OrbitSimulator& simulator,
+                             double mass, double radius,
+                             ofColor body_color, ofColor velocity_color,
                              vec2 initial_position, vec2 initial_velocity)
-    : simulator_(simulator) {
+    : mass_(mass),
+      radius_(radius),
+      body_color_(body_color),
+      velocity_color_(velocity_color),
+      simulator_(simulator) {
     vec2 param_bound(10, 10);
     initial_position_.set("Initial Position", initial_position, -param_bound, param_bound);
     initial_velocity_.set("Initial Velocity", initial_velocity, -param_bound, param_bound);
@@ -37,20 +43,21 @@ void CelestialBody::updateVelocityAndPosition(double time_step) {
     }
 }
 
-bool CelestialBody::crashedIntoStar() const {
-    return glm::length(position_) < kStarRadius + kPlanetRadius;
+bool CelestialBody::crashedIntoAnotherBody(const CelestialBody& other) const {
+    double distance_between_bodies = glm::length(position_ - other.position_);
+    return distance_between_bodies < radius_ + other.radius_;
 }
 
 void CelestialBody::drawBody() const {
-    ofSetColor(ofColor::blue);
+    ofSetColor(body_color_);
     ofDrawCircle(simulator_.getScreenCoordinates(position_),
-                 kPlanetRadius * simulator_.getScaleFactor());
+                 radius_ * simulator_.getScaleFactor());
 }
 
 void CelestialBody::drawTrail() const {
     ofSetLineWidth(3);
 
-    ofColor trail_color = ofColor::blue;
+    ofColor trail_color = body_color_;
     const double kMaxOpacity = 255;
 
     if (position_log_.empty()) {
@@ -71,7 +78,7 @@ void CelestialBody::drawTrail() const {
 
 void CelestialBody::drawVelocityVector() const {
     ofSetLineWidth(4);
-    ofSetColor(ofColor::orange);
+    ofSetColor(velocity_color_);
 
     // A velocity v will show up as a line with length kVectorScaleFactor * v
     const double kVectorScaleFactor = 0.35;
