@@ -16,9 +16,12 @@ class CelestialBody {
 public:
     /**
      * Creates a celestial body with a reference to its simulator.
+     * Velocity color is set to the complement of body color.
      * Also sets the ofParameters for initial position and velocity.
      */
     CelestialBody(const OrbitSimulator& simulator,
+                  double mass, double radius,
+                  ofColor body_color, ofColor velocity_color,
                   vec2 initial_position = vec2(0, 0),
                   vec2 initial_velocity = vec2(0, 0));
 
@@ -42,15 +45,20 @@ public:
     void updateVelocityAndPosition(double time_step);
 
     /**
-     * Returns true if planet is too close to star
+     * Returns true if planet is too close to another body
      */
-    bool crashedIntoStar() const;
+    bool crashedIntoAnotherBody(const CelestialBody& other) const;
 
     void drawBody() const;
 
     void drawTrail() const;
 
     void drawVelocityVector() const;
+
+    const double mass_;
+    const double radius_;
+    const ofColor body_color_;
+    const ofColor velocity_color_;
 
     // These initial parameters are public because the GUI panel in the OrbitSimulator
     // needs to access/modify them.
