@@ -13,7 +13,7 @@ using glm::vec2;
 namespace physicsvisuals {
 
 class OrbitSimulator : public ofBaseApp {
-private:
+protected:
     enum AppState {
         RUNNING,
         PAUSED,
@@ -31,25 +31,25 @@ public:
     /**
      * Function used for one time setup. Sets the title and background of the app.
      */
-    void setup();
+    void setup() override;
 
     /**
      * If the simulation is RUNNING, this method executes one step of Euler on the planet
      * and increments the time counter. (Called on every frame.)
      */
-    void update();
+    void update() override;
 
     /**
      * Draw the star, planet, and a trail behind the planet.
      * Also displays numerical information on the screen. (Called on every frame.)
      */
-    void draw();
+    void draw() override;
 
     /**
      * Responds to these keys: space (start simulation), p (pause/unpause), r (reset),
      * -/= (zoom in/out).
      */
-    void keyPressed(int key);
+    void keyPressed(int key) override;
 
     /**
      * Getter for scale_factor_.
@@ -64,14 +64,26 @@ public:
      */
     vec2 getScreenCoordinates(vec2 real_coordinates) const;
 
-private:
+protected:
+    /**
+     * Draws the circular bodies, trails, and velocity vectors of the CelestialBodies
+     */
+    void drawVisuals() const;
+
     /**
      * Displays numerical information about the orbit on the screen.
      */
     void drawNumericalInfo() const;
 
+    double time_elapsed_ = 0;
+
     AppState current_state_ = WELCOME_SCREEN;
 
+    ofxPanel input_panel_;
+
+    ofTrueTypeFont app_font_;
+
+private:
     CelestialBody planet_;
 
     /**
@@ -80,15 +92,9 @@ private:
      */
     const CelestialBody star_;
 
-    double time_elapsed_ = 0;
-
     /**
      * See getScaleFactor documentation
      */
     double scale_factor_ = 100;
-
-    ofxPanel input_panel_;
-
-    ofTrueTypeFont app_font_;
 };
 }  // namespace physicsvisuals

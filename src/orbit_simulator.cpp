@@ -62,10 +62,7 @@ void OrbitSimulator::draw() {
         return;
     }
 
-    star_.drawBody();
-    planet_.drawTrail();
-    planet_.drawVelocityVector();
-    planet_.drawBody();
+    drawVisuals();
 
     if (current_state_ == GETTING_USER_INPUT) {
         input_panel_.draw();
@@ -77,8 +74,15 @@ void OrbitSimulator::draw() {
 
     if (current_state_ == PLANET_CRASHED) {
         ofSetColor(ofColor::white);
-        app_font_.drawString("The planet crashed :(\nPress r to reset", 50, 50);
+        app_font_.drawString("A crash occurred :(\nPress r to reset", 50, 50);
     }
+}
+
+void OrbitSimulator::drawVisuals() const {
+    star_.drawBody();
+    planet_.drawTrail();
+    planet_.drawVelocityVector();
+    planet_.drawBody();
 }
 
 void OrbitSimulator::drawNumericalInfo() const {
