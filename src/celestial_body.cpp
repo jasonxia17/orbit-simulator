@@ -34,6 +34,10 @@ void CelestialBody::updateVelocityAndPosition(double time_step, const std::vecto
     vec2 net_acceleration = vec2(0, 0);
 
     for (const CelestialBody& other : body_list) {
+        if (this == &other) {
+            continue;
+        }
+        
         vec2 r_vec = position_ - other.position_;  // vector from other body to this body
 
         net_acceleration += -simulator_.kGravitationalConstant * other.mass_ /
