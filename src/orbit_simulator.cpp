@@ -23,7 +23,7 @@ namespace physicsvisuals {
 
 OrbitSimulator::OrbitSimulator()
     : planet_(*this, 1, 0.15, ofColor::blue, ofColor::orange, vec2(4, 0), vec2(0, 1)),
-      star_(*this, 1, 0.35, ofColor::yellow, ofColor::yellow) {}
+      star_(*this, 16, 0.35, ofColor::yellow, ofColor::yellow) {}
 
 void OrbitSimulator::setup() {
     ofSetWindowTitle("Going in Circles");
@@ -51,7 +51,7 @@ void OrbitSimulator::update() {
         }
 
         const double kTimeStep = 0.01;
-        planet_.updateVelocityAndPosition(kTimeStep);
+        planet_.updateVelocityAndPosition(kTimeStep, star_);
         time_elapsed_ += kTimeStep;
     }
 }

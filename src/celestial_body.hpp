@@ -3,7 +3,6 @@
 #include <deque>
 
 #include "ofMain.h"
-#include "physical_constants.hpp"
 
 using glm::vec2;
 
@@ -37,12 +36,13 @@ public:
     const vec2& getVelocity() const;
 
     /**
-     * Performs one step of Euler's method to calculate the new velocity and position of the planet.
+     * Performs one step of Euler's method to calculate
+     * the new velocity and position of the planet, based on the force exerted by star.
      * The parameter time_step specifies the step size.
      * 
      * Also updates position_log_.
      */
-    void updateVelocityAndPosition(double time_step);
+    void updateVelocityAndPosition(double time_step, const CelestialBody& star);
 
     /**
      * Returns true if planet is too close to another body

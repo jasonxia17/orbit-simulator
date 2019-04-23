@@ -30,9 +30,11 @@ const vec2& CelestialBody::getVelocity() const {
     return velocity_;
 }
 
-void CelestialBody::updateVelocityAndPosition(double time_step) {
-    vec2 acceleration = -kGravitationalParameter / pow(glm::length(position_), 3) * position_;
-    // a = -GM / |r|^3 * r, where r is a vector
+void CelestialBody::updateVelocityAndPosition(double time_step, const CelestialBody& star) {
+    vec2 r_vec = position_ - star.position_;  // vector from star to planet
+
+    vec2 acceleration = -star.mass_ / pow(glm::length(r_vec), 3) * r_vec;
+    // a = -GM / |r|^3 * r; G = 1 (in SI units) in this simulation
 
     velocity_ += acceleration * time_step;  // dv = a * dt
     position_ += velocity_ * time_step;     // dx = v * dt

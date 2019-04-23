@@ -7,7 +7,6 @@
 #include "celestial_body.hpp"  // definition of CelestialBody class
 #include "ofMain.h"
 #include "ofxGui.h"
-#include "physical_constants.hpp"
 
 using glm::vec2;
 
