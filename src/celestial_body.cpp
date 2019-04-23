@@ -30,19 +30,28 @@ const vec2& CelestialBody::getVelocity() const {
     return velocity_;
 }
 
-void CelestialBody::updateVelocityAndPosition(double time_step, const CelestialBody& star) {
-    vec2 r_vec = position_ - star.position_;  // vector from star to planet
+void CelestialBody::updateVelocityAndPosition(double time_step, const std::vector<CelestialBody>& body_list) {
+    vec2 net_acceleration = vec2(0, 0);
 
-    vec2 acceleration = -star.mass_ / pow(glm::length(r_vec), 3) * r_vec;
-    // a = -GM / |r|^3 * r; G = 1 (in SI units) in this simulation
+    for (const CelestialBody& other : body_list) {
+        vec2 r_vec = position_ - other.position_;  // vector from other body to this body
 
-    velocity_ += acceleration * time_step;  // dv = a * dt
-    position_ += velocity_ * time_step;     // dx = v * dt
+        net_acceleration += -simulator_.kGravitationalConstant * other.mass_ /
+                            pow(glm::length(r_vec), 3) * r_vec;
+        // a = -GM / |r|^3 * r
+    }
+
+    velocity_ += net_acceleration * time_step;  // dv = a * dt
+    position_ += velocity_ * time_step;         // dx = v * dt
 
     position_log_.push_front(position_);
     if (position_log_.size() > kMaxPositionsStored) {
         position_log_.pop_back();
     }
+}
+
+void CelestialBody::updateVelocityAndPosition(double time_step, const CelestialBody& star) {
+    updateVelocityAndPosition(time_step, std::vector<CelestialBody>{star});
 }
 
 bool CelestialBody::crashedIntoAnotherBody(const CelestialBody& other) const {

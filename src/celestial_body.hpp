@@ -1,6 +1,7 @@
 #pragma once
 
 #include <deque>
+#include <vector>
 
 #include "ofMain.h"
 
@@ -43,6 +44,13 @@ public:
      * Also updates position_log_.
      */
     void updateVelocityAndPosition(double time_step, const CelestialBody& star);
+
+    /**
+     * Same as method above, except it will update based on the force exerted by all bodies
+     * in the simulation, which is passed as body_list. If the vector contains this planet,
+     * it will be skipped (planet can't exert an external force on itself).
+     */
+    void updateVelocityAndPosition(double time_step, const std::vector<CelestialBody>& body_list);
 
     /**
      * Returns true if planet is too close to another body
