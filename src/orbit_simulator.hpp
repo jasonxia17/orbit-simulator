@@ -64,6 +64,16 @@ public:
      */
     vec2 getScreenCoordinates(vec2 real_coordinates) const;
 
+    /**
+     * Conventionally denoted by the letter G in physics. This is a fake value which
+     * the simulator uses for convenience (to keep numbers small). Since the value
+     * is a property of the simulation and not a true physical constant, it's stored
+     * as a class instance variable instead of a global constant.
+     * 
+     * Measured in standard SI units (N*m^2/kg^2)
+     */
+    const double kGravitationalConstant = 1.0;
+
 protected:
     /**
      * Draws the circular bodies, trails, and velocity vectors of the CelestialBodies
@@ -75,6 +85,9 @@ protected:
      */
     void drawNumericalInfo() const;
 
+    /**
+     * Measured in seconds.
+     */
     double time_elapsed_ = 0;
 
     AppState current_state_ = WELCOME_SCREEN;
