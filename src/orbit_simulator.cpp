@@ -22,7 +22,8 @@ string toRoundedString(const vec2& val) {
 namespace physicsvisuals {
 
 OrbitSimulator::OrbitSimulator()
-    : planet_(*this, vec2(4, 0), vec2(0, 1)) {}
+    : planet_(*this, 1, 0.15, ofColor::blue, ofColor::orange, vec2(4, 0), vec2(0, 1)),
+      star_(*this, 1, 0.35, ofColor::yellow, ofColor::yellow) {}
 
 void OrbitSimulator::setup() {
     ofSetWindowTitle("Going in Circles");
@@ -44,7 +45,7 @@ void OrbitSimulator::update() {
     }
 
     if (current_state_ == RUNNING) {
-        if (planet_.crashedIntoStar()) {
+        if (planet_.crashedIntoAnotherBody(star_)) {
             current_state_ = PLANET_CRASHED;
             return;
         }
@@ -61,13 +62,10 @@ void OrbitSimulator::draw() {
         return;
     }
 
+    star_.drawBody();
     planet_.drawTrail();
     planet_.drawVelocityVector();
     planet_.drawBody();
-
-    // draws the Star
-    ofSetColor(ofColor::yellow);
-    ofDrawCircle(getScreenCoordinates(vec2(0, 0)), kStarRadius * scale_factor_);
 
     if (current_state_ == GETTING_USER_INPUT) {
         input_panel_.draw();
@@ -91,11 +89,11 @@ void OrbitSimulator::drawNumericalInfo() const {
     app_font_.drawString("Time Elapsed (s): " + toRoundedString(time_elapsed_),
                          left_margin, 1 * vertical_spacing);
 
-    ofSetColor(ofColor::blue);
+    ofSetColor(planet_.body_color_);
     app_font_.drawString("Position (m): " + toRoundedString(planet_.getPosition()),
                          left_margin, 2 * vertical_spacing);
 
-    ofSetColor(ofColor::orange);
+    ofSetColor(planet_.velocity_color_);
     app_font_.drawString("Velocity (m/s): " + toRoundedString(planet_.getVelocity()),
                          left_margin, 3 * vertical_spacing);
 }

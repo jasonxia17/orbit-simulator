@@ -75,6 +75,12 @@ private:
 
     CelestialBody planet_;
 
+    /**
+     * In this simulation, the star is stationary, so it shouldn't need to be modified.
+     * This is a physical simplification, but the star movements should be negligible.
+     */
+    const CelestialBody star_;
+
     double time_elapsed_ = 0;
 
     /**
