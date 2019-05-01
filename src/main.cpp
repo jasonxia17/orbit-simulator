@@ -1,4 +1,5 @@
 #include "orbit_simulator.hpp"
+#include "chaotic_orbit_simulator.hpp"
 #include "ofMain.h"
 
 #define DISPLAY_MODE OF_WINDOW  // Can be OF_WINDOW or OF_FULLSCREEN
