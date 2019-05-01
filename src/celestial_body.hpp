@@ -10,7 +10,6 @@ using glm::vec2;
 namespace physicsvisuals {
 
 class OrbitSimulator;
-// must be forward declared, since it's not defined until after this file is included.
 
 class CelestialBody {
 public:
@@ -34,6 +33,7 @@ public:
     void resetMotion();
 
     const vec2& getPosition() const;
+
     const vec2& getVelocity() const;
 
     /**
@@ -63,14 +63,18 @@ public:
 
     void drawVelocityVector() const;
 
-    const double mass_;
+    const double mass_; // TODO: make this an ofParameter
+
     const double radius_;
+
     const ofColor body_color_;
+
     const ofColor velocity_color_;
 
-    // These initial parameters are public because the GUI panel in the OrbitSimulator
-    // needs to access/modify them.
-
+    /**
+     * Initial parameters controlled by the GUI panel in the simulator.
+     * Must be public to allow GUI panel to modify the parameters.
+     */
     ofParameter<vec2> initial_position_;
     ofParameter<vec2> initial_velocity_;
 
