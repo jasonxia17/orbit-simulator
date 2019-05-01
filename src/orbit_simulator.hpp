@@ -13,15 +13,6 @@ using glm::vec2;
 namespace physicsvisuals {
 
 class OrbitSimulator : public ofBaseApp {
-protected:
-    enum AppState {
-        RUNNING,
-        PAUSED,
-        GETTING_USER_INPUT,
-        PLANET_CRASHED,
-        WELCOME_SCREEN,
-    };
-
 public:
     /**
      * Constructor that calls the constructor for Celestial Body.
@@ -75,6 +66,13 @@ public:
     const double kGravitationalConstant = 1.0;
 
 protected:
+    enum AppState {
+        RUNNING,
+        PAUSED,
+        GETTING_USER_INPUT,
+        PLANET_CRASHED,
+        WELCOME_SCREEN, // ordering
+    };
     /**
      * Draws the star, planet, and velocity vector and trail of the planet.
      * Can be overridden for multi-body chaotic simulations.
