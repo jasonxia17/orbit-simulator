@@ -1,15 +1,24 @@
 # To-do
 
+* Change mass to an ofParameter, velocity_color should have default value, default initial position/velocity should be removed from constructor, radius should be proportional to mass^1/3,
+need a getRadius function
+* Allow user to scroll with arrow keys (OF_KEY_LEFT, etc.)
+* Chaotic orbit simulator (3+ bodies) that extends the OrbitSimulator class
 * Display a welcome message with information about how to use the app
 
 # Ideas
 
 * Provide an option to enforce circular orbits by calculating the initial velocity based on the initial position that the user inputs
+* Display magnitude of position and velocity
 * Display gravitational potential energy and kinetic energy, add methods to
 CelestialBody class for calculating these quantities
 * Display the coordinates/distance to star at the point where the mouse is hovering
 
 # Weekly Progress Log
+
+## Week of 5/1/2019
+
+* Implemented suggestions from code review
 
 ## Week of 4/27/2019
 
