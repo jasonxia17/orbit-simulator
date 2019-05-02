@@ -113,5 +113,10 @@ private:
      * See getScaleFactor documentation
      */
     double scale_factor_ = 100;
+
+    /**
+     * This is the Cartesian point which will appear at the center of the screen.
+     */
+    vec2 screen_center_;
 };
 }  // namespace physicsvisuals

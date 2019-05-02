@@ -105,6 +105,10 @@ void OrbitSimulator::drawInstructions() const {
 void OrbitSimulator::keyPressed(int key) {
     const double kZoomFactor = 1.03;  // amount of zoom per key press
 
+    // scroll step should be larger when screen is zoomed out more
+    // smaller scale factor --> larger scroll step
+    const double kScrollStep = 5.0 / scale_factor_;
+
     switch (key) {
         case '-':
             scale_factor_ /= kZoomFactor;
@@ -112,6 +116,19 @@ void OrbitSimulator::keyPressed(int key) {
         case '=':
         case '+':
             scale_factor_ *= kZoomFactor;
+            break;
+
+        case OF_KEY_LEFT:
+            screen_center_.x -= kScrollStep;
+            break;
+        case OF_KEY_RIGHT:
+            screen_center_.x += kScrollStep;
+            break;
+        case OF_KEY_DOWN:
+            screen_center_.y -= kScrollStep;
+            break;
+        case OF_KEY_UP:
+            screen_center_.y += kScrollStep;
             break;
 
         case ' ':
@@ -146,6 +163,7 @@ vec2 OrbitSimulator::getScreenCoordinates(vec2 real_coordinates) const {
     vec2 center(ofGetWindowWidth(), ofGetWindowHeight());
     center /= 2;
 
+    real_coordinates -= screen_center_;
     real_coordinates.y *= -1;  // canvas y-coordinates are the reverse of Cartesian y-coordinates
 
     return scale_factor_ * real_coordinates + center;
