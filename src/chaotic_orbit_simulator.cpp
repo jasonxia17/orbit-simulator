@@ -16,10 +16,15 @@ void ChaoticOrbitSimulator::update() {
         }
 
     } else if (current_state_ == RUNNING) {
-        // if (planet_.crashedIntoAnotherBody(star_)) {
-        //     current_state_ = PLANET_CRASHED;
-        //     return;
-        // }
+        // pairwise check for crashes
+        for (size_t i = 0; i < body_list_.size(); ++i) {
+            for (size_t j = i + 1; j < body_list_.size(); ++j) {
+                if (body_list_[i].crashedIntoAnotherBody(body_list_[j])) {
+                    current_state_ = PLANET_CRASHED;
+                    return;
+                }
+            }
+        }
 
         const double kTimeStep = 0.01;
         for (CelestialBody& body : body_list_) {
@@ -34,6 +39,10 @@ void ChaoticOrbitSimulator::draw() {
         body.drawTrail();
         body.drawVelocityVector();
         body.drawBody();
+    }
+
+    if (current_state_ == PLANET_CRASHED) {
+        drawCrashMessage();
     }
 }
 
