@@ -83,7 +83,7 @@ void OrbitSimulator::drawCrashMessage() const {
 
 void OrbitSimulator::drawNumericalInfo() const {
     float left_margin = 30;
-    float vertical_spacing = 55;  // space between consecutive lines of text
+    float vertical_spacing = 60;  // space between consecutive lines of text
 
     ofSetColor(ofColor::white);
     app_font_.drawString("Time Elapsed (s): " + toRoundedString(time_elapsed_),
@@ -98,6 +98,11 @@ void OrbitSimulator::drawNumericalInfo() const {
     app_font_.drawString("Velocity (m/s): " + toRoundedString(planet_.getVelocity()) +
                              "\nSpeed (m/s): " + toRoundedString(glm::length(planet_.getVelocity())),
                          left_margin, 3 * vertical_spacing);
+
+    ofSetColor(ofColor::green);
+    app_font_.drawString("KE (J): " + toRoundedString(planet_.calculateKineticEnergy()) +
+                             "\nGPE (J): " + toRoundedString(planet_.calculatePotentialEnergy(star_)),
+                         left_margin, 4 * vertical_spacing);
 }
 
 void OrbitSimulator::drawInstructions() const {
