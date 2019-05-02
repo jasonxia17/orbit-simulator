@@ -53,6 +53,7 @@ void OrbitSimulator::draw() {
     }
 
     drawVisuals();
+    drawInstructions();
 
     switch (current_state_) {
         case GETTING_USER_INPUT:
@@ -95,6 +96,17 @@ void OrbitSimulator::drawNumericalInfo() const {
                          left_margin, 3 * vertical_spacing);
 }
 
+void OrbitSimulator::drawInstructions() const {
+    std::string instructions =
+        "SPACE to start\n"
+        "p to pause/unpause\n"
+        "r to reset\n"
+        "-/+ to zoom\n"
+        "arrow keys to scroll\n";
+    ofSetColor(ofColor::white);
+    app_font_.drawString(instructions, ofGetWindowWidth() - 270, 50);
+}
+
 void OrbitSimulator::keyPressed(int key) {
     // Welcome screen only responds to the space bar
     if (current_state_ == WELCOME_SCREEN) {
@@ -133,7 +145,7 @@ void OrbitSimulator::keyPressed(int key) {
             time_elapsed_ = 0;
             current_state_ = GETTING_USER_INPUT;
             break;
-        
+
         default:
             break;
     }

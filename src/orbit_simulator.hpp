@@ -67,12 +67,13 @@ public:
 
 protected:
     enum AppState {
+        WELCOME_SCREEN,
+        GETTING_USER_INPUT,
         RUNNING,
         PAUSED,
-        GETTING_USER_INPUT,
         PLANET_CRASHED,
-        WELCOME_SCREEN, // ordering
     };
+
     /**
      * Draws the star, planet, and velocity vector and trail of the planet.
      * Can be overridden for multi-body chaotic simulations.
@@ -83,6 +84,11 @@ protected:
      * Displays numerical information about the orbit on the screen.
      */
     virtual void drawNumericalInfo() const;
+
+    /**
+     * Displays information about how to use the app.
+     */
+    void drawInstructions() const;
 
     /**
      * Measured in seconds.
