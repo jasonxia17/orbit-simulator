@@ -48,6 +48,17 @@ public:
     double getRadius() const;
 
     /**
+     * 1/2 mv^2, in Joules
+     */
+    double calculateKineticEnergy() const;
+
+    /**
+     * Gravitational potential energy with respect to the star.
+     * This quantity is always negative, and it goes to 0 at infinity.
+     */
+    double calculatePotentialEnergy(const CelestialBody& star) const;
+
+    /**
      * Performs one step of Euler's method to calculate
      * the new velocity and position of the planet, based on the force exerted by star.
      * The parameter time_step specifies the step size.

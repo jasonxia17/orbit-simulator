@@ -8,7 +8,7 @@ CelestialBody::CelestialBody(const OrbitSimulator& simulator, double mass,
     : body_color_(body_color),
       velocity_color_(velocity_color),
       simulator_(simulator) {
-    mass_.set("Mass", mass, 0, 50);
+    mass_.set("Mass", mass, 0, 30);
 
     vec2 param_bound(10, 10);
     initial_position_.set("Initial Position", initial_position, -param_bound, param_bound);
@@ -31,6 +31,14 @@ const vec2& CelestialBody::getVelocity() const {
 
 double CelestialBody::getRadius() const {
     return 0.15 * cbrt(mass_);
+}
+
+double CelestialBody::calculateKineticEnergy() const {
+    return 0.5 * mass_ * pow(glm::length(velocity_), 2);
+}
+
+double CelestialBody::calculatePotentialEnergy(const CelestialBody& star) const {
+    return -simulator_.kGravitationalConstant * star.mass_ * mass_ / glm::length(position_);
 }
 
 void CelestialBody::updateVelocityAndPosition(double time_step, const std::vector<CelestialBody>& body_list) {
