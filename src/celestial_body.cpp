@@ -2,15 +2,14 @@
 
 namespace physicsvisuals {
 
-CelestialBody::CelestialBody(const OrbitSimulator& simulator,
-                             double mass, double radius,
+CelestialBody::CelestialBody(const OrbitSimulator& simulator, double mass,
                              const vec2& initial_position, const vec2& initial_velocity,
                              ofColor body_color, ofColor velocity_color)
-    : mass_(mass),
-      radius_(radius),
-      body_color_(body_color),
+    : body_color_(body_color),
       velocity_color_(velocity_color),
       simulator_(simulator) {
+    mass_.set("Mass", mass, 0, 50);
+
     vec2 param_bound(10, 10);
     initial_position_.set("Initial Position", initial_position, -param_bound, param_bound);
     initial_velocity_.set("Initial Velocity", initial_velocity, -param_bound, param_bound);
@@ -30,6 +29,10 @@ const vec2& CelestialBody::getVelocity() const {
     return velocity_;
 }
 
+double CelestialBody::getRadius() const {
+    return 0.15 * cbrt(mass_);
+}
+
 void CelestialBody::updateVelocityAndPosition(double time_step, const std::vector<CelestialBody>& body_list) {
     vec2 net_acceleration = vec2(0, 0);
 
@@ -37,7 +40,7 @@ void CelestialBody::updateVelocityAndPosition(double time_step, const std::vecto
         if (this == &other) {
             continue;
         }
-        
+
         vec2 r_vec = position_ - other.position_;  // vector from other body to this body
 
         net_acceleration += -simulator_.kGravitationalConstant * other.mass_ /
@@ -60,13 +63,13 @@ void CelestialBody::updateVelocityAndPosition(double time_step, const CelestialB
 
 bool CelestialBody::crashedIntoAnotherBody(const CelestialBody& other) const {
     double distance_between_bodies = glm::length(position_ - other.position_);
-    return distance_between_bodies < radius_ + other.radius_;
+    return distance_between_bodies < getRadius() + other.getRadius();
 }
 
 void CelestialBody::drawBody() const {
     ofSetColor(body_color_);
     ofDrawCircle(simulator_.getScreenCoordinates(position_),
-                 radius_ * simulator_.getScaleFactor());
+                 getRadius() * simulator_.getScaleFactor());
 }
 
 void CelestialBody::drawTrail() const {

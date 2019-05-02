@@ -22,10 +22,10 @@ public:
      * @param initial_position: in meters, can be adjusted with GUI
      * @param initial_velocity: in meters/second, can be adjusted with GUI
      * @param body_color: the color used to draw the body and its trail
-     * @param velocity_color: the color used to draw the velocity vector
+     * @param velocity_color: the color used to draw the velocity vector,
+     *                        defaults to orange if unspecified
      */
-    CelestialBody(const OrbitSimulator& simulator,
-                  double mass, double radius,
+    CelestialBody(const OrbitSimulator& simulator, double mass,
                   const vec2& initial_position, const vec2& initial_velocity,
                   ofColor body_color, ofColor velocity_color = ofColor::orange);
 
@@ -40,6 +40,12 @@ public:
     const vec2& getPosition() const;
 
     const vec2& getVelocity() const;
+
+    /**
+     * Calculates the radius of the planet, which is proportional to the
+     * cube root of the mass.
+     */
+    double getRadius() const;
 
     /**
      * Performs one step of Euler's method to calculate
@@ -68,19 +74,21 @@ public:
 
     void drawVelocityVector() const;
 
-    const double mass_;  // TODO: make this an ofParameter
-
-    const double radius_;
-
+    /**
+     * See constructor for details about color variables.
+     */
     const ofColor body_color_;
 
     const ofColor velocity_color_;
 
     /**
-     * Initial parameters controlled by the GUI panel in the simulator.
-     * Must be public to allow GUI panel to modify the parameters.
+     * These parameters are controlled by the GUI panel in the simulator.
+     * They must be public to allow the GUI panel to modify the parameters.
      */
+    ofParameter<double> mass_;  // TODO: make this an ofParameter
+
     ofParameter<vec2> initial_position_;
+
     ofParameter<vec2> initial_velocity_;
 
 private:

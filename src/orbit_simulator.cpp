@@ -11,8 +11,8 @@ string toRoundedString(const vec2& val);
 }  // end anonymous namespace
 
 OrbitSimulator::OrbitSimulator()
-    : planet_(*this, 1, 0.15, vec2(4, 0), vec2(0, 1), ofColor::blue),
-      star_(*this, 16, 0.35, vec2(0, 0), vec2(0, 0), ofColor::yellow) {}
+    : planet_(*this, 1, vec2(4, 0), vec2(0, 1), ofColor::blue),
+      star_(*this, 16, vec2(0, 0), vec2(0, 0), ofColor::yellow) {}
 
 void OrbitSimulator::setup() {
     ofSetWindowTitle("Going in Circles");

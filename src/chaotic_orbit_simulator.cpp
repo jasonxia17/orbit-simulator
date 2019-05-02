@@ -4,9 +4,9 @@ namespace physicsvisuals {
 
 void ChaoticOrbitSimulator::setup() {
     OrbitSimulator::setup();
-    body_list_.push_back(CelestialBody(*this, 5, 0.15, vec2(3, -3), vec2(-2, -2), ofColor::blue));
-    body_list_.push_back(CelestialBody(*this, 30, 0.2, vec2(0, 0), vec2(0.1, 0.1), ofColor::magenta));
-    body_list_.push_back(CelestialBody(*this, 3, 0.1, vec2(5, -5), vec2(1, 2), ofColor::green));
+    body_list_.push_back(CelestialBody(*this, 5, vec2(3, -3), vec2(-2, -2), ofColor::blue));
+    body_list_.push_back(CelestialBody(*this, 30, vec2(0, 0), vec2(0.1, 0.1), ofColor::magenta));
+    body_list_.push_back(CelestialBody(*this, 3, vec2(5, -5), vec2(1, 2), ofColor::green));
 }
 
 void ChaoticOrbitSimulator::update() {
