@@ -74,20 +74,14 @@ protected:
     };
 
     /**
-     * Draws the star, planet, and velocity vector and trail of the planet.
-     * Can be overridden for multi-body chaotic simulations.
-     */
-    virtual void drawVisuals() const;
-
-    /**
-     * Displays numerical information about the orbit on the screen.
-     */
-    virtual void drawNumericalInfo() const;
-
-    /**
      * Displays information about how to use the app.
      */
     void drawInstructions() const;
+
+    /**
+     * Displays a message if a crash occurs.
+     */
+    void drawCrashMessage() const;
 
     /**
      * Measured in seconds.
@@ -96,11 +90,12 @@ protected:
 
     AppState current_state_ = GETTING_USER_INPUT;
 
-    ofxPanel input_panel_;
-
-    ofTrueTypeFont app_font_;
-
 private:
+    /**
+     * Displays numerical information about the orbit on the screen.
+     */
+    void drawNumericalInfo() const;
+
     CelestialBody planet_;
 
     /**
@@ -118,5 +113,9 @@ private:
      * This is the Cartesian point which will appear at the center of the screen.
      */
     vec2 screen_center_;
+
+    ofxPanel input_panel_;
+
+    ofTrueTypeFont app_font_;
 };
 }  // namespace physicsvisuals

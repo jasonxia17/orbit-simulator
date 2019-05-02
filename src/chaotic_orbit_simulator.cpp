@@ -4,19 +4,18 @@ namespace physicsvisuals {
 
 void ChaoticOrbitSimulator::setup() {
     OrbitSimulator::setup();
-    // body_list_.push_back(CelestialBody(
-    //     *this, 5, 0.15, ofColor::blue, ofColor::orange, vec2(3, -3), vec2(-2, -2)));
-    // body_list_.push_back(CelestialBody(
-    //     *this, 30, 0.2, ofColor::magenta, ofColor::orange, vec2(0, 0), vec2(0.1, 0.1)));
-    // body_list_.push_back(CelestialBody(
-    //     *this, 3, 0.1, ofColor::green, ofColor::orange, vec2(5, -5), vec2(1, 2)));
-    for (CelestialBody& body : body_list_) {
-        body.resetMotion();
-    }
+    body_list_.push_back(CelestialBody(*this, 5, 0.15, vec2(3, -3), vec2(-2, -2), ofColor::blue));
+    body_list_.push_back(CelestialBody(*this, 30, 0.2, vec2(0, 0), vec2(0.1, 0.1), ofColor::magenta));
+    body_list_.push_back(CelestialBody(*this, 3, 0.1, vec2(5, -5), vec2(1, 2), ofColor::green));
 }
 
 void ChaoticOrbitSimulator::update() {
-    if (current_state_ == RUNNING) {
+    if (current_state_ == GETTING_USER_INPUT) {
+        for (CelestialBody& body : body_list_) {
+            body.resetMotion();
+        }
+
+    } else if (current_state_ == RUNNING) {
         // if (planet_.crashedIntoAnotherBody(star_)) {
         //     current_state_ = PLANET_CRASHED;
         //     return;
@@ -30,7 +29,7 @@ void ChaoticOrbitSimulator::update() {
     }
 }
 
-void ChaoticOrbitSimulator::drawVisuals() const {
+void ChaoticOrbitSimulator::draw() {
     for (const CelestialBody& body : body_list_) {
         body.drawTrail();
         body.drawVelocityVector();

@@ -24,17 +24,7 @@ public:
      */
     void update() override;
 
-protected:
-    /**
-     * Draws the circular bodies, trails, and velocity vectors of all CelestialBodies
-     * in the simulation.
-     */
-    void drawVisuals() const override;
-
-    /**
-     * No numerical information is displayed on the screen.
-     */
-    void drawNumericalInfo() const override {}
+    void draw() override;
 
 private:
     /**
