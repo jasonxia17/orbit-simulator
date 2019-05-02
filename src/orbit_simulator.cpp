@@ -47,11 +47,6 @@ void OrbitSimulator::update() {
 }
 
 void OrbitSimulator::draw() {
-    if (current_state_ == WELCOME_SCREEN) {
-        // TODO: display welcome message
-        return;
-    }
-
     drawVisuals();
     drawInstructions();
 
@@ -108,14 +103,6 @@ void OrbitSimulator::drawInstructions() const {
 }
 
 void OrbitSimulator::keyPressed(int key) {
-    // Welcome screen only responds to the space bar
-    if (current_state_ == WELCOME_SCREEN) {
-        if (key == ' ') {
-            current_state_ = GETTING_USER_INPUT;
-        }
-        return;
-    }
-
     const double kZoomFactor = 1.03;  // amount of zoom per key press
 
     switch (key) {

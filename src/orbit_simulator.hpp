@@ -67,7 +67,6 @@ public:
 
 protected:
     enum AppState {
-        WELCOME_SCREEN,
         GETTING_USER_INPUT,
         RUNNING,
         PAUSED,
@@ -95,7 +94,7 @@ protected:
      */
     double time_elapsed_ = 0;
 
-    AppState current_state_ = WELCOME_SCREEN;
+    AppState current_state_ = GETTING_USER_INPUT;
 
     ofxPanel input_panel_;
 
