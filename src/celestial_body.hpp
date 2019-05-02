@@ -14,15 +14,20 @@ class OrbitSimulator;
 class CelestialBody {
 public:
     /**
-     * Creates a celestial body with a reference to its simulator.
-     * Velocity color is set to the complement of body color.
-     * Also sets the ofParameters for initial position and velocity.
+     * Creates a celestial body
+     * 
+     * @param simulator: reference to body's simulator (needed for drawing)
+     * @param mass: in kilograms, can be adjusted with GUI afterwards,
+     *              also determines radius of body
+     * @param initial_position: in meters, can be adjusted with GUI
+     * @param initial_velocity: in meters/second, can be adjusted with GUI
+     * @param body_color: the color used to draw the body and its trail
+     * @param velocity_color: the color used to draw the velocity vector
      */
     CelestialBody(const OrbitSimulator& simulator,
                   double mass, double radius,
-                  ofColor body_color, ofColor velocity_color,
-                  vec2 initial_position = vec2(0, 0),
-                  vec2 initial_velocity = vec2(0, 0));
+                  const vec2& initial_position, const vec2& initial_velocity,
+                  ofColor body_color, ofColor velocity_color = ofColor::orange);
 
     /**
      * Sets position and velocity to the initial values specified
@@ -63,7 +68,7 @@ public:
 
     void drawVelocityVector() const;
 
-    const double mass_; // TODO: make this an ofParameter
+    const double mass_;  // TODO: make this an ofParameter
 
     const double radius_;
 

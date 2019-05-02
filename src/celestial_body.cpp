@@ -4,8 +4,8 @@ namespace physicsvisuals {
 
 CelestialBody::CelestialBody(const OrbitSimulator& simulator,
                              double mass, double radius,
-                             ofColor body_color, ofColor velocity_color,
-                             vec2 initial_position, vec2 initial_velocity)
+                             const vec2& initial_position, const vec2& initial_velocity,
+                             ofColor body_color, ofColor velocity_color)
     : mass_(mass),
       radius_(radius),
       body_color_(body_color),
