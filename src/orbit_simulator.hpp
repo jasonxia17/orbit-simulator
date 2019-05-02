@@ -99,10 +99,11 @@ private:
     CelestialBody planet_;
 
     /**
-     * In this simulation, the star is stationary, so it shouldn't need to be modified.
+     * In this simulation, the star is stationary.
      * This is a physical simplification, but the star movements should be negligible.
+     * However, it must be non-const so that the user can change its mass.
      */
-    const CelestialBody star_;
+    CelestialBody star_;
 
     /**
      * See getScaleFactor documentation

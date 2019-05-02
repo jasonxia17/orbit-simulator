@@ -24,6 +24,12 @@ void OrbitSimulator::setup() {
     ofxGuiSetFont(font_settings);
     input_panel_.setup();
     input_panel_.setDefaultHeight(35);
+
+    star_.mass_.setName("Star Mass");
+    input_panel_.add(star_.mass_);
+    planet_.mass_.setName("Planet Mass");
+    input_panel_.add(planet_.mass_);
+
     input_panel_.add(planet_.initial_position_);
     input_panel_.add(planet_.initial_velocity_);
 }
@@ -94,6 +100,7 @@ void OrbitSimulator::drawNumericalInfo() const {
 
 void OrbitSimulator::drawInstructions() const {
     std::string instructions =
+        "G = 1 N*m^2/kg^2\n\n"
         "SPACE to start\n"
         "p to pause/unpause\n"
         "r to reset\n"
