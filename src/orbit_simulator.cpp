@@ -18,7 +18,7 @@ void OrbitSimulator::setup() {
     ofSetWindowTitle("Going in Circles");
     ofBackground(ofColor::black);
 
-    ofTrueTypeFontSettings font_settings("../fonts/Liberation-Mono-Regular.ttf", 16);
+    ofTrueTypeFontSettings font_settings("../bin/data/Liberation-Mono-Regular.ttf", 16);
     app_font_.load(font_settings);
 
     ofxGuiSetFont(font_settings);
