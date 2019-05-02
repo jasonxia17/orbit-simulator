@@ -1,27 +1,29 @@
 # To-do
 
-* Change mass to an ofParameter, velocity_color should have default value, default initial position/velocity should be removed from constructor, radius should be proportional to mass^1/3,
-need a getRadius function
-* Allow user to scroll with arrow keys (OF_KEY_LEFT, etc.)
-* Chaotic orbit simulator (3+ bodies) that extends the OrbitSimulator class
-* Display a welcome message with information about how to use the app
+Finished! :)
 
 # Ideas
 
 * Provide an option to enforce circular orbits by calculating the initial velocity based on the initial position that the user inputs
-* Display magnitude of position and velocity
-* Display gravitational potential energy and kinetic energy, add methods to
-CelestialBody class for calculating these quantities
 * Display the coordinates/distance to star at the point where the mouse is hovering
 
 # Weekly Progress Log
 
 ## Week of 5/1/2019
 
+* Displayed gravitational potential energy and kinetic energy
+  * Added methods to CelestialBody class for calculating these quantities
+* Displayed magnitude of position and velocity
+* Changed mass to an ofParameter which can be adjusted by GUI
+* Radius calculated as proportional to mass^1/3 in getRadius function
+* Allow user to scroll with arrow keys (OF_KEY_LEFT, etc.)
+* Display a message with information about how to use the app
+* velocity_color has default value, default initial position/velocity were removed from constructor
 * Implemented suggestions from code review
 
 ## Week of 4/27/2019
 
+* Started working on chaotic orbit simulator (3+ bodies) that extends the OrbitSimulator class
 * Restructured code to make it more object oriented
   * Moved mass, radius, colors, and initial ofParameters for position and velocity into the CelestialBody class
   * Moved drawing functions (draw body, trail, and velocity vector) into the CelestialBody class
@@ -59,11 +61,6 @@ the back-end of the simulation should be feasible. I'll probably use the same ma
 https://fiftyexamples.readthedocs.io/en/latest/gravity.html
 
 # Ideas for Stretch Goal 
-
-## Multiplanet Chaotic Simulation
-
-* accumulateNetForce(CelestialBody other) adds gravitational force caused by "other" to the net force
-
 
 ## Electric Field/Potential Tool
 
